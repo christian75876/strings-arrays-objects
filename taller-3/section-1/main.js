@@ -1,50 +1,36 @@
 //Division del nombre
 const spaceBlank = (fullName) => {
-  let space = fullName.split(" ");
-  name.push(space[0]);
-  lastName.push(space[1]);
+  let fullNames = fullName.split(" ");
+  let name =  fullNames[0].substring(0,3);
+  let lastName = fullNames[1].substring(0,3);
+  let newUser = name + lastName;
+  let email = newUser + domain;
+  return {newUser, email}
 };
 //Asignacion de usuario
-const addUserNames = (name, lastName, isCreated = false) => {
-  let newUser = name.slice(0, 3) + lastName.slice(0, 3);
-  console.log(newUser);
-  if (isCreated) {
-    return {
-      username: newUser,
-      email: newUser + "1" + domain,
-    };
-  } else {
-    return {
-      username: newUser,
-      email: newUser + domain,
-    };
+const addUserNames = (user) => {  
+  let contador = '';
+  while(users.hasOwnProperty(user.newUser + contador)){
+    contador++;
   }
+  user.newUser = user.newUser + contador;
+  user.email = user.newUser + domain;
+
+  users[user.newUser] = user.email
+
 };
 
 //Respaldo de la informacion;
 const domain = "@myDomain.com";
-const name = [];
-const lastName = [];
 const users = {};
 
 /**************************************
  * *************************************/
 let follow = confirm("Desea ingresar un usuario?");
-let count = 0;
 
 while (follow) {
   let fullName = prompt("Ingresa tu nombre y apellido").toLowerCase();
-  let comparation;
-  spaceBlank(fullName);
-
-  let newUser = addUserNames(name[count], lastName[count], (isCreated = false));
-  comparation = Object.keys(users);
-  
-  if (comparation.includes(newUser.username)) {
-    newUser = addUserNames(name[count], lastName[count], (isCreated = true));
-  }
-  users[newUser.username] = newUser;
-  console.log(newUser);
-  
-  count++;
+  const newUser = spaceBlank(fullName);
+  addUserNames(newUser);
+ console.log(users)
 }
