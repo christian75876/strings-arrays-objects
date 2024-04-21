@@ -1,3 +1,4 @@
+try {
 let password = prompt('Ingrese una contraseña segura debe contener:\nLetras mayusculas y minusculas\nContener numeros y caracteres especiales\nDebe ser minimo de 8 caracteres');
 
 let message = 'ok' 
@@ -16,4 +17,6 @@ if(!sizeRegularExpresion) message += '\nLa contraseña minimo debe ser de 8 cara
 
 alert(message);
 
-
+} catch (error) {
+console.log(error);    
+}
