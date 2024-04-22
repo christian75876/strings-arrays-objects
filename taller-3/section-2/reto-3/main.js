@@ -1,5 +1,5 @@
 
-const products = []
+const products = {}
 
 
 
@@ -33,7 +33,6 @@ const duplicate = () => {
                 count++;
                 duplicatedName = `${product.name} copy ${count}`;
             }
-            
                 nombre = duplicatedName;
                 precio = product.price;
                 cantidad = product.quantity;
@@ -70,14 +69,30 @@ const menu = () =>{
 //******************************** */
 //Busqueda de productos
 const search = () => {
-    let find = prompt(`Deseas realizar la busqueda por medio de:
-                    1.Visualizar la tabla de todos los ariculos
+    let find = prompt(`Deseas filtrar la busqueda por medio de:
+                    1.Visualizar todos los ariculos por tabla.
                     2.Realizar busqueda por nombre.
                     3.Visualizar articulos por rango de precio`);
     if(find.match(/^[1-3]$/)){
         selectSearch(find)
     }
 }
+
+const selectSearch = (search) => {
+    switch(search){
+        case '1':
+            console.table(products);
+            break;
+        case '2':
+            searchName();
+            break;
+        case '3':
+            searchPrice();
+            break;
+
+    }
+}
+
 //Busqueda por nombre
 const searchName = () => {
     let find = prompt('Ingrese el nombre del producto que deseas buscar:').toLocaleLowerCase();
@@ -97,20 +112,14 @@ const searchName = () => {
     }
 }
 
-const selectSearch = (search) => {
-    switch(search){
-        case '1':
-            console.table(products);
-            break;
-        case '2':
-            searchName();
-            break;
-        case '3':
-            searchPrice();
-            break;
+//Busqueda por rango de precio
+const searchPrice = () => {
+    let min = Number(prompt('Ingrese el valor minimo de busqueda'));
+    let max = Number(prompt('Ingrese el Valor maximo de busqueda'));
 
-    }
+    let foundPrice = Object.values(products).filter(product => product.quantity >= min && product.quantity <= max)
 }
+
 
 let ok = true
 while(ok){
@@ -120,8 +129,11 @@ while(ok){
             addProduct();
             break;
         case '2':
-            duplicate()
-        // case '3':
+            duplicate();
+            break;
+        case '3':
+            search();
+            break;
 
     }
 }
