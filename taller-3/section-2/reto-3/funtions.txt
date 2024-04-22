@@ -1,0 +1,48 @@
+// const duplicateProduct = () => {
+//     let find = prompt('Ingresa el nombre del producto que deseas duplicar')
+//     let foundProduct = Object.values(products).find(product => product.name.toLowerCase().includes(find));
+
+//     if (foundProduct) {
+//         // Duplicar el producto
+//         let count = 1;
+//         let duplicatedName = `${foundProduct.name} - copy ${count}`;
+//         while (products[duplicatedName]) {
+//             count++;
+//             duplicatedName = `${foundProduct.name} - copy ${count}`;
+//         }
+
+//         products[duplicatedName] = {
+//             name: duplicatedName,
+//             price: foundProduct.price,
+//             quantity: foundProduct.quantity,
+//             description: foundProduct.description,
+//         };
+
+//         console.log(`Producto duplicado: ${duplicatedName}`);
+//     } else {
+//         alert('No se encontró el producto para duplicar');
+//     }
+// }
+
+//Duplicación de productos
+
+// const duplicate = () => {
+//     let find = prompt('Ingresa el nombre del producto que deseas duplicar')
+//     let found = Object.values(products).filter(product => product.name.toLocaleLowerCase().includes(find));
+//     let count = 0
+//     if(found.length > 0){
+//         found.forEach(product => {
+//             count++;
+//         })
+//         products[found.name] = {
+//             name: found.name += 'copy' + count,
+//             price: found.price,
+//             quantity: found.quantity,
+//             descripcion: found.description
+//         }
+
+//     }else{
+//         alert('No existen productos para duplicar');
+//         return;
+//     }
+// }

@@ -2,6 +2,7 @@
 const products = []
 
 
+
 //Ingreso de producto
 const addProduct = () => {
     let nombre = prompt('Ingrese nombre del producto:');
@@ -14,86 +15,40 @@ const addProduct = () => {
         quantity: cantidad,
         description: descripcion,
     }
-    console.log(products);
-
 }
-
-// const duplicateProduct = () => {
-//     let find = prompt('Ingresa el nombre del producto que deseas duplicar')
-//     let foundProduct = Object.values(products).find(product => product.name.toLowerCase().includes(find));
-
-//     if (foundProduct) {
-//         // Duplicar el producto
-//         let count = 1;
-//         let duplicatedName = `${foundProduct.name} - copy ${count}`;
-//         while (products[duplicatedName]) {
-//             count++;
-//             duplicatedName = `${foundProduct.name} - copy ${count}`;
-//         }
-
-//         products[duplicatedName] = {
-//             name: duplicatedName,
-//             price: foundProduct.price,
-//             quantity: foundProduct.quantity,
-//             description: foundProduct.description,
-//         };
-
-//         console.log(`Producto duplicado: ${duplicatedName}`);
-//     } else {
-//         alert('No se encontró el producto para duplicar');
-//     }
-// }
-
-//Duplicación de productos
-
-// const duplicate = () => {
-//     let find = prompt('Ingresa el nombre del producto que deseas duplicar')
-//     let found = Object.values(products).filter(product => product.name.toLocaleLowerCase().includes(find));
-//     let count = 0
-//     if(found.length > 0){
-//         found.forEach(product => {
-//             count++;
-//         })
-//         products[found.name] = {
-//             name: found.name += 'copy' + count,
-//             price: found.price,
-//             quantity: found.quantity,
-//             descripcion: found.description
-//         }
-
-//     }else{
-//         alert('No existen productos para duplicar');
-//         return;
-//     }
-// }
 
 const duplicate = () => {
     let find = prompt('Ingresa el nombre del producto que deseas duplicar');
     let found = Object.values(products).filter(product => product.name.toLowerCase().includes(find));
 
     if (found.length > 0) {
-        let count = 1;
+        let count = 0;
+        let nombre = '';
+        let precio = '';
+        let cantidad = '';
+        let des = '';
+        let duplicatedName = find;
         found.forEach(product => {
-            let duplicatedName = `${product.name} copy ${count}`;
             while (products[duplicatedName]) {
                 count++;
                 duplicatedName = `${product.name} copy ${count}`;
             }
-            products[duplicatedName] = {
-                name: duplicatedName,
-                price: product.price,
-                quantity: product.quantity,
-                description: product.description
-            };
-            count++;
+            
+                nombre = duplicatedName;
+                precio = product.price;
+                cantidad = product.quantity;
+                des = product.description;
         });
-        console.log(products);
+        products[duplicatedName] = {
+            name: nombre,
+            price: precio,
+            quantity: cantidad,
+            description: des
+        };
     } else {
         alert('No existen productos para duplicar');
     }
 };
-
-
 
 /**Menu de ingreso de acción */
 const menu = () =>{
@@ -159,6 +114,7 @@ const selectSearch = (search) => {
 
 let ok = true
 while(ok){
+    console.log(products);
     switch(menu()){
         case '1':
             addProduct();
