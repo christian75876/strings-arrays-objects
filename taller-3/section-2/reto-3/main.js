@@ -199,6 +199,11 @@ const selectOrder = (num) => {
             });
             console.table(sortProducts);
             break;
+        case '2':
+            let sortProductsReverse = Object.values(products).sort((a,b) => {
+                return order === 'des' ? b.price - a.price : a.price - b.price;
+            })
+            console.table(sortProductsReverse);
 
     }
 
