@@ -15,6 +15,7 @@ const addProduct = () => {
         quantity: cantidad,
         description: descripcion,
     }
+    
 }
 
 const duplicate = () => {
@@ -58,11 +59,11 @@ const menu = () =>{
                          4.Actualización de producto
                          5.Venta de producto
                          6.Compra de producto
-                         8.Eliminar producto
-                         9.Cálculo valor inventario
-                         10.Menu de ordenamiento de productos
-                         11.Identificación de productos con malas palabras
-                         12.Reporte general de productos`);
+                         7.Eliminar producto
+                         8.Cálculo valor inventario
+                         9.Menu de ordenamiento de productos
+                         10.Identificación de productos con malas palabras
+                         11.Reporte general de productos`);
     return select;
 }
 
@@ -95,7 +96,7 @@ const selectSearch = (search) => {
 
 //Busqueda por nombre
 const searchName = () => {
-    let find = prompt('Ingrese el nombre del producto que deseas buscar:').toLocaleLowerCase();
+    let find = prompt('Ingrese el nombre del producto:').toLocaleLowerCase();
     let foundProduct = Object.values(products).filter(product => product.name.toLowerCase().includes(find));
 
     if(foundProduct.length > 0){
@@ -119,6 +120,7 @@ const searchPrice = () => {
 
     let foundPrice = Object.values(products).filter(product => product.price >= min && product.price <= max)
     console.table(foundPrice)
+    return
 }
 
 //Actualizacion de productos
@@ -148,6 +150,35 @@ const updateProduct = () => {
     }
 }
 
+//Eliminación de productos
+const deleteProduct = () => {
+    let foundDelete = searchName();
+    if(foundDelete){
+        delete products[foundDelete.name];
+        console.log('Elemento eliminado.');
+    }
+}
+
+//Venta de producto
+const sell = () => {
+    let find = searchName();
+    let quantityRequied = Number(prompt('Ingrese la cantida de producto que desea comprar:'));
+    if(quantityRequied < Number(find.quantity)){
+        alert(`La cantidad tiene un costo de: ${quantityRequied * Number(find.price)}`)
+        find.quantity -= quantityRequied;
+    }else{
+        alert('No se dispone de la cantidad suficiente')
+    }
+
+}
+
+//Compra de producto
+const buy = () => {
+    let find = searchName();
+    let quantitybuy = Number(prompt('Ingrese la cantidad de propducto que comprara para actualizar el inventario:'));
+    find.quantity = Number(find.quantity) + quantitybuy
+    alert('Se a actualizado correctamente el inventario');
+}
 
 let ok = true
 while(ok){
@@ -163,7 +194,17 @@ while(ok){
             search();
             break;
         case '4':
-            
+            updateProduct();
+            break;
+        case '5':
+            sell();
+            break;
+        case '6':
+            buy()
+            break;
+        case '7':
+            deleteProduct();
+            break;
 
     }
 }
