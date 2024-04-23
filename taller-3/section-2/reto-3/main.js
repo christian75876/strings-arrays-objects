@@ -194,10 +194,11 @@ const sumInventory = () => {
 const selectOrder = (num) => {
     switch(num){
         case '1':
-            Object.values(products).sort((a, b) => {
+           let sortProducts = Object.values(products).sort((a, b) => {
                 return order === 'asc' ? a.price - b.price : b.price - a.price;
             });
-            console.table(order)
+            console.table(sortProducts);
+            break;
 
     }
 
