@@ -121,6 +121,33 @@ const searchPrice = () => {
     console.table(foundPrice)
 }
 
+//Actualizacion de productos
+const updateProduct = () => {
+    let found = searchName()
+    let find = prompt(`Ingrese numero:
+                    1.Editar nombre.
+                    2.Editar precio.
+                    3.Editar cantidad.
+                    4.Editar descripción.`)
+    switch(find){
+        case '1':
+            found.name = prompt('Ingrese nuevo nombre a asignar');
+            break;
+        case '2':
+            found.price = prompt('Ingrese el nuevo precio a asignar.')
+            break;
+        case '3':
+            found.quantity = prompt('Ingrese la nueva cantidad a asignar.')
+            break;
+        case '4':
+            found.quantity = prompt('Ingrese la nueva descripción a asignar.')
+            break;
+        default:
+            alert('Opcion no valida')
+            break;
+    }
+}
+
 
 let ok = true
 while(ok){
