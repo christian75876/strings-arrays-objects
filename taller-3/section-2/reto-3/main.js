@@ -180,6 +180,47 @@ const buy = () => {
     alert('Se a actualizado correctamente el inventario');
 }
 
+//Sumatoria de inventario
+const sumInventory = () => {
+    let total = 0;
+    Object.values(products).forEach(product =>{
+        let aux = Number(product.quantity * product.price);
+        total += aux;
+    })
+    alert(`El total de la sumatoria del inventario es: ${total}`);
+}
+
+//Menu ordenamiento de productos
+const selectOrder = (num) => {
+    switch(num){
+        case '1':
+            Object.values(products).sort((a, b) => {
+                return order === 'asc' ? a.price - b.price : b.price - a.price;
+            });
+            console.table(order)
+
+    }
+
+}
+
+const order = () => {
+    let select = prompt(`Ingrese numero segun:
+                        1.Odenar de mayor a menor por precio.
+                        2.Ordenar de menor a mayor por precio.
+                        3.Ordenar primero los productos con menor cantidad.
+                        4.Ordenar primero los productos con mayor cantidad.
+                        5.Ordenar alfabeticamente.`)
+    if(select.match(/^[1-5]$/)){
+        selectOrder(select);
+    }
+    else{
+        alert('Ingreso un valor no valido');
+
+    }
+}
+
+
+
 let ok = true
 while(ok){
     console.log(products);
@@ -204,6 +245,12 @@ while(ok){
             break;
         case '7':
             deleteProduct();
+            break;
+        case '8':
+            sumInventory();
+            break;
+        case '9':
+            order();
             break;
 
     }
