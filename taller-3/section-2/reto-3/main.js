@@ -204,6 +204,21 @@ const selectOrder = (num) => {
                 return order === 'des' ? b.price - a.price : a.price - b.price;
             })
             console.table(sortProductsReverse);
+            break;
+        case '3':
+            let sortQuantityMax = Object.values(products).sort((a,b) => {
+                return order === 'max' ? a.quantity - b.quantity : b.quantity - a.quantity;
+            });
+            console.table(sortQuantityMax);
+            break;
+        case '4': 
+            let sortQuantityMin = Object.values(products).sort((a,b) => {
+                return order === 'min' ? b.quantity - a.quantity : a.quantity - b.quantity;
+            })
+            console.table(sortQuantityMin);
+            break;
+       // case '5':
+            
 
     }
 
