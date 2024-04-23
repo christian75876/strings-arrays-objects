@@ -217,9 +217,14 @@ const selectOrder = (num) => {
             })
             console.table(sortQuantityMin);
             break;
-       // case '5':
-            
-
+        case '5':
+            let sortName = Object.values(products).sort((a,b) => {
+                return order === 'name' ? b.name - a.name : a.name - b.name;
+            })           
+            console.table(sortName);
+            break
+        default:
+            alert('ingreso un valor no valido!!!');
     }
 
 }
