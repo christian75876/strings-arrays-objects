@@ -117,7 +117,8 @@ const searchPrice = () => {
     let min = Number(prompt('Ingrese el valor minimo de busqueda'));
     let max = Number(prompt('Ingrese el Valor maximo de busqueda'));
 
-    let foundPrice = Object.values(products).filter(product => product.quantity >= min && product.quantity <= max)
+    let foundPrice = Object.values(products).filter(product => product.price >= min && product.price <= max)
+    console.table(foundPrice)
 }
 
 
@@ -134,6 +135,8 @@ while(ok){
         case '3':
             search();
             break;
+        case '4':
+            
 
     }
 }
