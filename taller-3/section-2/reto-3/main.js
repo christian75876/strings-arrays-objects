@@ -67,6 +67,7 @@ const menu = () =>{
     return select;
 }
 
+
 //******************************** */
 //Busqueda de productos
 const search = () => {
@@ -218,9 +219,7 @@ const selectOrder = (num) => {
             console.table(sortQuantityMin);
             break;
         case '5':
-            let sortName = Object.values(products).sort((a,b) => {
-                return order === 'name' ? b.name - a.name : a.name - b.name;
-            })           
+            let sortName = Object.values(products).sort((a,b) => a.name.localeCompare(b.name));
             console.table(sortName);
             break
         default:
@@ -278,6 +277,8 @@ while(ok){
         case '9':
             order();
             break;
-
+        default:
+            ok = false
+            break;
     }
 }
