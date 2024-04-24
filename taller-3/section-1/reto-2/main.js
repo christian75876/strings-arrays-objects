@@ -1,24 +1,28 @@
-try {
-let password = prompt('Ingrese una contraseña segura debe contener:\nLetras mayusculas y minusculas\nContener numeros y caracteres especiales\nDebe ser minimo de 8 caracteres');
+let password = prompt(
+  "Ingresa la contraseña debe ser:\n#Minimo a 8 caracteres\n#Contener 8 caracteres\n#Contener un numero minimo\n#Contener al menos una letra\n#Contener almenos un caracter especial"
+);
 
-let message = 'ok' 
+let  requied = 'Es necesario que que tenga';
 
-const letter = /[a-zA-Z]/.test(password);
+const hasMinLength = /.{8,}./.test(password);
+const leter = /[a-zA-Z]/.test(password);
 const number = /[0-9]/.test(password);
-const especial = /[!@#$%^&*()+=_\-{}\[\]:;"'?<>,.|\/\\~`]/.test(password);
-// const size = password.length > 8;
-const sizeRegularExpresion = /^.{8,}$/.test(password);
+const symbol = /[!#$@%(=_|~`\[-{}:.,'"<>?)&*+/]/.test(password);
 
-if(!letter || !number || !especial || !sizeRegularExpresion || !sizeRegularExpresion)message = 'No as ingresado cumplido con las politicas de la contraseña:';
-if(!letter) message += '\nFalto una letra mayuscula o minuscula.';
-if(!number) message += '\nFalto un numero';
-if(!especial) message += '\nFalto un caracter especial';
-if(!sizeRegularExpresion) message += '\nLa contraseña minimo debe ser de 8 caracteres';
-
-alert(message);
-
-} catch (error) {
-console.log(error);    
+if (hasMinLength && leter && number && symbol) {
+  alert("Contrasela ingresada correctamente");
+} else {
+  if (hasMinLength) {
+    requied.push(hasMinLength);
+  }
+  if (!leter) {
+    requied += 'letras'
+  }
+  if (!number) {
+    requied += "numero";
+  }
+  if (!symbol) {
+    requied.push(symbol);
+  }
 }
-
-
+console.log(requied);

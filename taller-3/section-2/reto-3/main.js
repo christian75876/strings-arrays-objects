@@ -250,16 +250,15 @@ const badWordsArray = ['fuck', 'hp']
 //Busqueda de las malas palabras
 const badWords = () => {
     Object.values(products).forEach((product) => {
-        const descriptionWords = product.description.split(" ");
-        descriptionWords.forEach((word) => {
-            if (badWordsArray.includes(word)) {
-              console.log(
-                `Producto: ${product.name} - ${product.price} - ${product.quantity} - ${product.description}`
-              );
-            }
+        let description = product.description;
+        badWordsArray.forEach((badWord) => {
+            const regex = new RegExp(badWord, 'gi'); 
+            description = description.replace(regex, '*'.repeat(badWord.length));
         });
+        console.log(`Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} - Descripción: ${description}`);
     });
 }
+
 
 let ok = true
 while(ok){
