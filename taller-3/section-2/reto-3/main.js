@@ -228,6 +228,7 @@ const selectOrder = (num) => {
 
 }
 
+
 const order = () => {
     let select = prompt(`Ingrese numero segun:
                         1.Odenar de mayor a menor por precio.
@@ -244,7 +245,21 @@ const order = () => {
     }
 }
 
+const badWordsArray = ['fuck', 'hp']
 
+//Busqueda de las malas palabras
+const badWords = () => {
+    Object.values(products).forEach((product) => {
+        const descriptionWords = product.description.split(" ");
+        descriptionWords.forEach((word) => {
+            if (badWordsArray.includes(word)) {
+              console.log(
+                `Producto: ${product.name} - ${product.price} - ${product.quantity} - ${product.description}`
+              );
+            }
+        });
+    });
+}
 
 let ok = true
 while(ok){
@@ -276,6 +291,9 @@ while(ok){
             break;
         case '9':
             order();
+            break;
+        case '10':
+            badWords();
             break;
         default:
             ok = false
