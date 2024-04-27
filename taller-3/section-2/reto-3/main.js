@@ -245,7 +245,7 @@ const order = () => {
     }
 }
 
-const badWordsArray = ['fuck', 'hp']
+const badWordsArray = ['groseria', 'insulto']
 
 //Busqueda de las malas palabras
 const badWords = () => {
@@ -258,6 +258,52 @@ const badWords = () => {
         console.log(`Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} - Descripción: ${description}`);
     });
 }
+
+
+//reporte general
+const generateReport = () => {
+    const totalProducts = Object.keys(products).length;
+    const totalInventoryValue = Object.values(products).reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
+    const sortedProductsByPrice = Object.values(products).sort((a, b) => a.price - b.price);
+    const mostExpensiveProducts = sortedProductsByPrice.slice(-3).reverse();
+    const cheapestProducts = sortedProductsByPrice.slice(0, 3);
+    const sortedProductsByQuantity = Object.values(products).sort((a, b) => a.quantity - b.quantity);
+    const productsWithMostQuantity = sortedProductsByQuantity.slice(-3).reverse();
+    const productsWithLeastQuantity = sortedProductsByQuantity.slice(0, 3);
+    const blacklistedProducts = [];
+    
+    Object.values(products).forEach(product => {
+        badWordsArray.forEach(badWord => {
+            if (product.description.toLowerCase().includes(badWord)) {
+                blacklistedProducts.push(product);
+            }
+        });
+    });
+
+    console.log(`--- Reporte General de Productos ---`);
+    console.log(`Total de Productos: ${totalProducts}`);
+    console.log(`Valor Total del Inventario: $${totalInventoryValue}`);
+    console.log(`--- Productos Más Caros ---`);
+    mostExpensiveProducts.forEach(product => {
+        console.log(`${product.name}: $${product.price}`);
+    });
+    console.log(`--- Productos Más Baratos ---`);
+    cheapestProducts.forEach(product => {
+        console.log(`${product.name}: $${product.price}`);
+    });
+    console.log(`--- Productos con Mayor Cantidad ---`);
+    productsWithMostQuantity.forEach(product => {
+        console.log(`${product.name}: ${product.quantity} unidades`);
+    });
+    console.log(`--- Productos con Menor Cantidad ---`);
+    productsWithLeastQuantity.forEach(product => {
+        console.log(`${product.name}: ${product.quantity} unidades`);
+    });
+    console.log(`--- Productos con Malas Palabras en la Descripción ---`);
+    blacklistedProducts.forEach(product => {
+        console.log(`${product.name}: ${product.description}`);
+    });
+};
 
 
 let ok = true
@@ -294,6 +340,8 @@ while(ok){
         case '10':
             badWords();
             break;
+        case '11':
+            generateReport();
         default:
             ok = false
             break;
